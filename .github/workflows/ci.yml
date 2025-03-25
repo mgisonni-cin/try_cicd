@@ -24,6 +24,12 @@ jobs:
         run: |
           ./download_files.sh
 
+      - name: Load secrets from local file
+        run: |
+          export $(cat ~/secrets.env | xargs)
+          ncftpget -u "$FTP_USER" -p "$FTP_PASS" ftp://bolftp.ecmwf.int//.banner
+
+
       # Step to install Singularity
       - name: Install Singularity
         run: |
