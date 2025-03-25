@@ -35,11 +35,11 @@ jobs:
           #./build_container.sh
           sudo singularity build /tmp/container.sif Singularity.def
 
-      - name: Upload Singularity container
-        uses: actions/upload-artifact@v4
-        with:
-          name: singularity-container
-          path: /tmp/container.sif
+          #      - name: Upload Singularity container
+          #        uses: actions/upload-artifact@v4
+          #        with:
+          #          name: singularity-container
+          #          path: /tmp/container.sif
 
       - name: Run tests
         run: |
