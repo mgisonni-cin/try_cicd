@@ -24,6 +24,12 @@ jobs:
         run: |
           ./download_files.sh
 
+      # Step to install Singularity
+      - name: Install Singularity
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singularity-container
+
       - name: Build container
         run: |
           ./build_container.sh
