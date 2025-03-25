@@ -41,6 +41,12 @@ jobs:
           #          name: singularity-container
           #          path: /tmp/container.sif
 
+      - name: Check if container exists
+        run: |
+          ls -lah /tmp/container.sif
+
+
+
       - name: Run tests
         run: |
           ./do_tests.sh
