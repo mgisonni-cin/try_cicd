@@ -1,0 +1,47 @@
+name: Build and Test Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up environment variables
+        run: |
+          echo "BUILD_PATH=path/to/build" >> $GITHUB_ENV
+          
+      - name: Download files
+        run: |
+          ./download_files.sh
+
+      # Step to install Singularity
+      - name: Install Singularity
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singularity-container
+
+      - name: Build container
+        run: |
+          #./build_container.sh
+          sudo singularity build /tmp/container.sif Singularity.def
+
+      - name: Upload Singularity container
+        uses: actions/upload-artifact@v3
+        with:
+          name: singularity-container
+          path: /tmp/container.sif
+
+      - name: Run tests
+        run: |
+          ./do_tests.sh
+
