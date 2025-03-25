@@ -30,12 +30,12 @@ jobs:
           ncftpget -u "$FTP_USER" -p "$FTP_PASS" ftp://bolftp.ecmwf.int//.banner
 
 
-      # Step to install Singularity
-      - name: Install Singularity
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y singularity-container
-
+          #      # Step to install Singularity
+          #      - name: Install Singularity
+          #        run: |
+          #          sudo apt-get update
+          #          sudo apt-get install -y singularity-container
+          #
       - name: Build container
         run: |
           # Build the container with Singularity
