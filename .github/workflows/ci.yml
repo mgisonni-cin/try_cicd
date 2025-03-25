@@ -45,7 +45,54 @@ jobs:
         run: |
           ls -lah /tmp/container.sif
 
+name: Build and Test Pipeline
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up environment variables
+        run: |
+          echo "BUILD_PATH=path/to/build" >> $GITHUB_ENV
+          
+      - name: Download files
+        run: |
+          ./download_files.sh
+
+      # Step to install Singularity
+      - name: Install Singularity
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y singularity-container
+
+      - name: Build container
+        run: |
+          # Build the container with Singularity
+          sudo singularity build /tmp/container.sif Singularity.def
+
+      # Move the Singularity container to a more accessible location
+      - name: Move Singularity container to accessible directory
+        run: |
+          # Move the container to the home directory or any other directory
+          sudo mv /tmp/container.sif /home/massimo/runner/my_container.sif
+          echo "Container moved to /home/massimo/runner/my_container.sif"
+
+      # (Optional) List files in the directory to verify
+      - name: List files in the directory
+        run: |
+          ls -lah /home/massimo/runner
 
       - name: Run tests
         run: |
