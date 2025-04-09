@@ -1,0 +1,27 @@
+# .github/workflows/singularity-build.yml
+
+name: Singularity Container Build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-container:
+    runs-on: self-hosted  # your local machine with Singularity
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Build Singularity container
+        run: |
+          cd /mnt/vol1/IFS_container/
+          sudo singularity build raps21_nv241_light.sif definitions/raps21_nvhpc241_light.def
+
+      - name: Upload container artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: raps21-container
+          path: /mnt/vol1/IFS_container/raps21_nv241_light.sif
+    
