@@ -1,4 +1,4 @@
-# .github/workflows/singularity-build.yml
+# .github/workflows/raps_build.yml
 
 name: Singularity Container Build
 
@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-container:
-    runs-on: self-hosted  # your local machine with Singularity
+    runs-on: self-hosted  
 
     steps:
       - name: Checkout code
