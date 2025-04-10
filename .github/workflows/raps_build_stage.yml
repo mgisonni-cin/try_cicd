@@ -17,7 +17,7 @@ jobs:
       - name: Build Singularity container
         run: |
           cd /mnt/vol1/IFS_container/
-          sudo env APPTAINER_TMPDIR=/mnt/vol1/singularity_tmp APPTAINER_CACHEDIR=/mnt/vol1/singularity_cache  singularity build raps21_nv241_light.sif definitions/raps21_nvhpc241_light.def_stage2
+          sudo env SINGULARITY_TMPDIR=/mnt/vol1/singularity_tmp SINGULARITY_CACHEDIR=/mnt/vol1/singularity_cache APPTAINER_TMPDIR=/mnt/vol1/singularity_tmp APPTAINER_CACHEDIR=/mnt/vol1/singularity_cache  singularity build raps21_nv241_light.sif definitions/raps21_nvhpc241_light.def_stage2
 
       - name: Upload container artifact
         uses: actions/upload-artifact@v4
