@@ -4,7 +4,7 @@ name: Singularity Container Build
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main-no ]
 
 jobs:
   build-container:
