@@ -1,0 +1,17 @@
+# .github/workflows/download_artifact.yml
+
+name: Download container
+
+on:
+  workflow_dispatch:
+
+jobs:
+  download-container:
+    runs-on: self-hosted  # or 'ubuntu-latest' if not using a self-hosted runner
+    steps:
+      - name: Download container artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: raps21-container
+          path: ./container
+
